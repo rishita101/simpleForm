@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Enrollment Form</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style>
+       html, body{
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        form{
+            width: 100%;
+            border: 1px solid black;
+            padding: 1.5%;
+        }
+        .display-section{
+            overflow-y: auto;
+            overflow-x: hidden;
+            border: 1px solid black;
+            padding: 1.5%;
+            width: 100%;
+            height: 430px;
+        }
+        .display-section table tbody tr:nth-child(even){
+            background-color: rgba(152, 135, 21, 0.178);
+        }
+        .display-row {
+        opacity: 0;
+        animation: fade-in 3s forwards;
+        }
+        @keyframes fade-in{
+            from{
+                opacity: 0;
+            }
+            to{
+                opacity: 1;
+            }
+        }
+        .row-divider{
+            position: absolute;
+            border-left: 5px solid green;
+            height: 65%;
+            left: 50%;
+            margin-left: -0.0225%;
+        }
+        .table-responsive{
+            height: 100%;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Row 1: Heading -->
+        <div class="row">
+            <div class="col-md-12">
+                <h1 style="background-color: aqua; color: white; text-align: center;">Student Enrollment Form</h1>
+            </div>
+        </div>
+        
+        <!-- Row 2: Form and Display Section -->
+        <div class="row">
+            <!-- Column 1: Form -->
+            <div class="col-md-6">
+                <form class="form-horizontal" id="enrollment-form">
+                    <div class="form-group">
+                        <label for="name" class="col-sm-3 control-label">Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required minlength="5" pattern="[A-Za-z ]+">
+                            <div id ="name-error" class="error-message"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="col-sm-3 control-label">Email</label>
+                        <div class="col-sm-9">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required pattern="[a-z0-9.-%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone" class="col-sm-3 control-label">Phone No:</label>
+                        <div class="col-sm-9">
+                            <input type="tel" class="form-control" id="phone" name="phone" placeholder="123-45-678" required minlength="10" maxlength="10" pattern="^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[6789]\d{9}$">
+                            <div id="phone-error" class="error-message"></div>
+                        </div>
+                    </div>
+                    <div clas="form-group">
+                        <label for="password" class="col-sm-3 control-label">Password:</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required minlength="8">
+                        </div>
+                        <div id="password-error" class="error-message"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm_password" class="col-sm-3 control-label" id="confirm_password">Confirm Password:</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Re-enter the password" required>
+                        </div>
+                        <div id="password-error" class="error-message" ></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="image-link" class="col-sm-3 control-label">Image Link</label>
+                        <div class="col-sm-9">
+                            <input type="url" class="form-control" id="image-link" name="image-link" placeholder="Enter link to your image" pattern=".*\.(png|jpg)$">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Gender</label>
+                        <div class="col-sm-9">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="gender" value="Male" checked> Male
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="gender" value="Female"> Female
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Skills</label>
+                        <div class="col-sm-9">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="skills[]" value="HTML"> HTML
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="skills[]" value="JAVA" checked> JAVA
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="skills[]" value="CSS">CSS
+                                </label>
+                            </div>
+                            </div>
+                    </div>
+                    <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <button type="submit" class="btn btn-primary">Enroll Student</button>
+                                    <button type="reset" class="btn btn-danger">Clear</button>
+
+                                </div>
+
+                    </div>
+                </form>
+            </div>
+            <!-- Column 2: Display Section -->
+            <div class="col-md-6">
+                <div class="display-section">
+                    <div class="table-responsive">
+                        <h3 style="text-align: center;">Enrolled Students</h3>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr class="display-row">
+                                    <th style="background-color:rgba(153, 188, 120, 0.623); color: white ;">Description</th>
+                                    <th style="background-color: rgba(153, 188, 120, 0.623); color: white;">Image</th>
+                                </tr>
+                            </thead>
+                            <tbody id="enrollment-table-body">
+                                <!-- The enrollment data will be dynamically added here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row-divider"></div>
+    
+            <!-- Row 3: Copyright -->
+            <div class="row">
+                <div class="col-md-12">
+                    <p style="background-color: aqua; text-align: center; color: white;">@copyright 2020-2021 by Fresher Training</p>
+                </div>
+            </div>
+        </div>
+    </div>
+            <!-- jQuery -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <!-- Bootstrap JavaScript -->
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+            <script>
+                // Add event listener for form submission
+                $("#enrollment-form").submit(function(event) {
+                // Prevent the default form submission
+                event.preventDefault();
+        
+                // Get the form data
+                var formData = {
+                    name: $("#name").val(),
+                    email: $("#email").val(),
+                    phone: $("#phone").val(),
+                    password: $("#password").val(),
+                    imageLink: $("#image-link").val(),
+                    gender: $("input[name='gender']:checked").val(),
+                    skills: $("input[name='skills[]']:checked").map(function() { return $(this).val(); }).get()
+                };
+                 // Append the form data to the enrollment table
+                $("#enrollment-table-body").append(
+                    "<tr><td>" + formData.name + "<br>" + formData.email + "<br>" + formData.phone +"<br>"+formData.password+"<br>"+ "<br>" + formData.gender +"<br>" + formData.skills.join(", ") + "<br>" +
+                    "<td><img src='" + formData.imageLink + "' target='_blank' style='max-height: 150px; max-weight: 150px'></a></td></tr>"
+                    );
+                // Reset the form
+                $(this).trigger("reset");
+            });
+
+
+        </script>
+    </body>
+</html>
